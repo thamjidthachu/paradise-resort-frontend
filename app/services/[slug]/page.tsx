@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -15,7 +14,7 @@ import { Footer } from "@/components/footer"
 import { useBooking } from "@/components/booking-provider"
 import { useToast } from "@/hooks/use-toast"
 import { useParams } from "next/navigation"
-import { se } from "date-fns/locale"
+import { ReviewSection } from "@/components/ui/review-section"
 
 export default function ServiceDetailPage() {
   const params = useParams<{ slug: string }>()
@@ -232,8 +231,12 @@ export default function ServiceDetailPage() {
               />
           </div>
           <Separator /> 
-          {/* review code should be here */}
-        </div>
+          {/* Reviews Section */}
+          <div className="mt-8">
+  <h3 className="text-lg font-semibold mb-4">Rate this service</h3>
+    <ReviewSection serviceSlug={service.slug} />
+    </div>
+    </div>
       </div>
       <Footer />
     </div>
