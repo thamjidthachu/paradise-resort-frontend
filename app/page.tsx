@@ -9,14 +9,16 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { TrendingHeader } from "@/components/trending-header"
 import { Sparkles, Utensils, Waves, Calendar } from "lucide-react"
+import { authFetch } from "@/utils/authFetch"
 
 type Service = {
   id: number
   name: string
-  image: string | null
   slug: string
-  description: string // HTML string
+  synopsis: string
+  description: string
   create_time: string
+  files?: { id: number; images: string }[]
 }
 
 export default function HomePage() {
@@ -24,7 +26,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/home/`)
+    authFetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/`)
       .then((res) => res.json())
       .then((data) => {
         setServices(data)
@@ -144,7 +146,11 @@ export default function HomePage() {
                   <CardContent className="p-6">
                     <div className="relative mb-4">
                       <img
-                        src={service.image || "/placeholder.svg"}
+                        src={
+                          service.files && service.files[0]?.images
+                            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${service.files[0].images}`
+                            : "/placeholder.svg"
+                        }
                         alt={service.name}
                         className="w-full h-48 object-cover rounded-lg"
                       />
@@ -152,10 +158,7 @@ export default function HomePage() {
                     <h3 className="font-semibold text-xl mb-2 group-hover:text-teal-600 transition-colors">
                       {service.name}
                     </h3>
-                    <div
-                      className="text-gray-600 mb-4 prose prose-sm max-w-none"
-                      dangerouslySetInnerHTML={{ __html: service.description }}
-                    />
+                    <p className="text-gray-600">{service.synopsis}</p>
                     <Link href={`/services/${service.id}`}>
                       <Button variant="outline">View Details</Button>
                     </Link>

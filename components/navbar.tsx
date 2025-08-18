@@ -12,6 +12,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -117,15 +118,13 @@ export function Navbar() {
                       {item.name}
                     </Link>
                   ))}
-                  <div className="flex space-x-4 pt-4">
-                    <Button variant="outline" className="flex-1">
-                      <User className="h-4 w-4 mr-2" />
-                      Account
-                    </Button>
-                    <Button variant="outline" className="flex-1">
-                      <Heart className="h-4 w-4 mr-2" />
-                      Favorites
-                    </Button>
+                  <div className="mt-8 flex flex-col gap-2">
+                    <Link href="/login">
+                      <Button variant="outline" className="w-full">Login</Button>
+                    </Link>
+                    <Link href="/register">
+                      <Button variant="default" className="w-full">Register</Button>
+                    </Link>
                   </div>
                 </div>
               </SheetContent>
@@ -136,3 +135,26 @@ export function Navbar() {
     </nav>
   )
 }
+
+function AuthPopover() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="ghost" size="icon" aria-label="Account">
+          <User className="h-6 w-6" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent align="end" className="w-40 p-2">
+        <div className="flex flex-col gap-2">
+          <Link href="/login">
+            <Button variant="outline" className="w-full">Login</Button>
+          </Link>
+          <Link href="/register">
+            <Button variant="default" className="w-full">Register</Button>
+          </Link>
+        </div>
+      </PopoverContent>
+    </Popover>
+  )
+}
+<AuthPopover />
