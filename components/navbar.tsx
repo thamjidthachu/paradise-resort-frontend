@@ -118,7 +118,7 @@ export function Navbar() {
                       {item.name}
                     </Link>
                   ))}
-                  <div className="mt-8 flex flex-col gap-2">
+                  <div className="absolute bottom-8 left-5 right-5 flex flex-col gap-2">
                     <Link href="/login">
                       <Button variant="outline" className="w-full">Login</Button>
                     </Link>

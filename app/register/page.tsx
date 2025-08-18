@@ -86,8 +86,8 @@ export default function RegisterPage() {
 
   return (
     <div>
-      <TrendingHeader />
       <Navbar />
+      <TrendingHeader />
     <div className="flex justify-center py-12">
       <Card className="w-full max-w-md shadow-xl animate-fade-in">
         <CardContent className="p-8">

@@ -9,8 +9,8 @@ import Link from 'next/link'
 export default function CancellationPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <TrendingHeader />
       <Navbar />
+      <TrendingHeader />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center mb-8">
