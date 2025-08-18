@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
+import { authFetch } from "@/utils/authFetch"
 
 export function ReviewSection({ serviceSlug }: { serviceSlug: string }) {
   const [reviews, setReviews] = useState<any[]>([])
@@ -21,7 +22,7 @@ export function ReviewSection({ serviceSlug }: { serviceSlug: string }) {
   useEffect(() => {
     setLoading(true)
     const url = nextUrl || `${process.env.NEXT_PUBLIC_API_BASE_URL}/services/${serviceSlug}/reviews/?page=${page}`
-    fetch(url)
+    authFetch(url)
       .then(res => res.json())
       .then(data => {
         // If paginated, use results and next
@@ -30,7 +31,7 @@ export function ReviewSection({ serviceSlug }: { serviceSlug: string }) {
           setHasMore(!!data.next)
           setNextUrl(data.next)
         } else {
-          setReviews(prev => [...prev, ...(data.results || data)])
+          setReviews(prev => [...prev, ...(data.results || [])])
           setHasMore(!!data.next)
           setNextUrl(data.next)
         }
@@ -52,7 +53,7 @@ export function ReviewSection({ serviceSlug }: { serviceSlug: string }) {
     e.preventDefault()
     if (!rating || !message.trim()) return
     setPosting(true)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/${serviceSlug}/reviews/`, {
+    const res = await authFetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/${serviceSlug}/reviews/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ rating, message }),

@@ -6,6 +6,9 @@ import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { authFetch } from "@/utils/authFetch"
+import { Footer } from "@/components/footer"
+import { Navbar } from "@/components/navbar"
+import { TrendingHeader } from "@/components/trending-header"
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<any>(null)
@@ -32,11 +35,14 @@ export default function ProfilePage() {
   }
 
   return (
+    <div>
+      <TrendingHeader />
+      <Navbar />
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-100 to-white">
       <Card className="w-full max-w-md shadow-xl animate-fade-in">
         <CardContent className="p-8 flex flex-col items-center">
           <Image
-            src={profile.avatar || "/placeholder-user.jpg"}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${profile.avatar || "/placeholder-user.jpg"}`}
             alt={profile.username}
             width={80}
             height={80}
@@ -46,15 +52,20 @@ export default function ProfilePage() {
           <div className="text-gray-500 mb-4">@{profile.username}</div>
           <Separator className="my-4" />
           <div className="w-full space-y-2 text-center">
-            <div><span className="font-medium">Email:</span> {profile.email}</div>
-            <div><span className="font-medium">Phone:</span> {profile.phone}</div>
-            <div><span className="font-medium">Gender:</span> {profile.gender}</div>
-          </div>
+            <div><span className="font-medium">Email:</span>&nbsp;{profile.email}</div>
+            <div><span className="font-medium">Phone:</span>&nbsp;{profile.phone}</div>
+            <div>
+              <span className="font-medium">Gender:</span>
+              &nbsp;{profile.gender === 'F' ? 'Female' : 'Male'}
+            </div>
+        </div>
           <Button variant="outline" className="mt-6 w-full" asChild>
             <a href="/logout">Logout</a>
           </Button>
         </CardContent>
       </Card>
+    </div>
+    <Footer />
     </div>
   )
 }

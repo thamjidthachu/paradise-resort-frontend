@@ -9,6 +9,9 @@ import { Separator } from "@/components/ui/separator"
 import { useToast } from "@/components/ui/use-toast"
 import { User, Lock } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { Navbar } from "@/components/navbar"
+import { TrendingHeader } from "@/components/trending-header"
+import { Footer } from "@/components/footer"
 
 export default function LoginPage() {
   const [form, setForm] = useState({ username: "", password: "" })
@@ -36,7 +39,7 @@ export default function LoginPage() {
       localStorage.setItem("refresh_token", data.refresh)
       toast({ title: "Login successful!", description: "Welcome back!" })
       // Redirect to profile or home
-      router.push("/profile")
+      router.push("/")
     } else {
       const err = await res.json()
       toast({ title: "Login failed", description: err.detail || "Invalid credentials.", variant: "destructive" })
@@ -45,11 +48,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-100 to-white">
-      <Card className="w-full max-w-md shadow-xl animate-fade-in">
-        <CardContent className="p-8">
-          <h2 className="text-2xl font-bold mb-2 text-center">Login</h2>
-          <p className="text-gray-500 mb-6 text-center">Sign in to your account</p>
+    <div>
+      <TrendingHeader />
+      <Navbar />
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-100 to-white">
+        <Card className="w-full max-w-md shadow-xl animate-fade-in">
+          <CardContent className="p-8">
+            <h2 className="text-2xl font-bold mb-2 text-center">Login</h2>
+            <p className="text-gray-500 mb-6 text-center">Sign in to your account</p>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Label htmlFor="username">Username</Label>
@@ -75,6 +81,8 @@ export default function LoginPage() {
           </div>
         </CardContent>
       </Card>
+    </div>
+    < Footer />
     </div>
   )
 }

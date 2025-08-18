@@ -10,6 +10,9 @@ import { Separator } from "@/components/ui/separator"
 import { useToast } from "@/components/ui/use-toast"
 import { User, Mail, Phone, Lock, Image as ImageIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { Footer } from "@/components/footer"
+import { TrendingHeader } from "@/components/trending-header"
+import { Navbar } from "@/components/navbar"
 
 export default function RegisterPage() {
   const [form, setForm] = useState({
@@ -82,7 +85,10 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-100 to-white">
+    <div>
+      <TrendingHeader />
+      <Navbar />
+    <div className="flex justify-center py-12">
       <Card className="w-full max-w-md shadow-xl animate-fade-in">
         <CardContent className="p-8">
           <h2 className="text-2xl font-bold mb-2 text-center">Create Account</h2>
@@ -120,11 +126,11 @@ export default function RegisterPage() {
               <Label>Gender</Label>
               <div className="flex gap-6 mt-1">
                 <label className="flex items-center gap-1 cursor-pointer">
-                  <input type="radio" name="gender" value="male" checked={form.gender === "male"} onChange={handleChange} className="accent-teal-500" />
+                  <input type="radio" name="gender" value="F" checked={form.gender === "male"} onChange={handleChange} className="accent-teal-500" />
                   <span role="img" aria-label="Male" className="text-blue-500">♂️</span> Male
                 </label>
                 <label className="flex items-center gap-1 cursor-pointer">
-                  <input type="radio" name="gender" value="female" checked={form.gender === "female"} onChange={handleChange} className="accent-teal-500" />
+                  <input type="radio" name="gender" value="F" checked={form.gender === "female"} onChange={handleChange} className="accent-teal-500" />
                   <span role="img" aria-label="Female" className="text-pink-500">♀️</span> Female
                 </label>
               </div>
@@ -160,6 +166,8 @@ export default function RegisterPage() {
           </div>
         </CardContent>
       </Card>
+    </div>
+    <Footer />
     </div>
   )
 }
