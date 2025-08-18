@@ -9,6 +9,7 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { TrendingHeader } from "@/components/trending-header"
 import { Sparkles, Utensils, Waves, Calendar } from "lucide-react"
+import { authFetch } from "@/utils/authFetch"
 
 type Service = {
   id: number
@@ -25,7 +26,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/`)
+    authFetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/`)
       .then((res) => res.json())
       .then((data) => {
         setServices(data)

@@ -127,10 +127,6 @@ export default function RegisterPage() {
                   <input type="radio" name="gender" value="female" checked={form.gender === "female"} onChange={handleChange} className="accent-teal-500" />
                   <span role="img" aria-label="Female" className="text-pink-500">♀️</span> Female
                 </label>
-                <label className="flex items-center gap-1 cursor-pointer">
-                  <input type="radio" name="gender" value="other" checked={form.gender === "other"} onChange={handleChange} className="accent-teal-500" />
-                  <span className="h-4 w-4 rounded-full bg-gray-400 inline-block" /> Other
-                </label>
               </div>
             </div>
             <div>

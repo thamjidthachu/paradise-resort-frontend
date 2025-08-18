@@ -5,13 +5,14 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { authFetch } from "@/utils/authFetch"
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/profile/`, {
+    authFetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/profile/`, {
       credentials: "include"
     })
       .then(res => res.json())

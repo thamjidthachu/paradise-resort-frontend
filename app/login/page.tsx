@@ -8,11 +8,13 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { useToast } from "@/components/ui/use-toast"
 import { User, Lock } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export default function LoginPage() {
   const [form, setForm] = useState({ username: "", password: "" })
   const [loading, setLoading] = useState(false)
   const { toast } = useToast()
+  const router = useRouter()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))
@@ -28,8 +30,13 @@ export default function LoginPage() {
       credentials: "include"
     })
     if (res.ok) {
+      const data = await res.json()
+      // Save tokens
+      localStorage.setItem("access_token", data.access)
+      localStorage.setItem("refresh_token", data.refresh)
       toast({ title: "Login successful!", description: "Welcome back!" })
-      // Optionally redirect here
+      // Redirect to profile or home
+      router.push("/profile")
     } else {
       const err = await res.json()
       toast({ title: "Login failed", description: err.detail || "Invalid credentials.", variant: "destructive" })

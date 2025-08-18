@@ -15,6 +15,7 @@ import { useBooking } from "@/components/booking-provider"
 import { useToast } from "@/hooks/use-toast"
 import { useParams } from "next/navigation"
 import { ReviewSection } from "@/components/ui/review-section"
+import { authFetch } from "@/utils/authFetch"
 
 export default function ServiceDetailPage() {
   const params = useParams<{ slug: string }>()
@@ -28,7 +29,7 @@ export default function ServiceDetailPage() {
 
   useEffect(() => {
     if (!params?.slug) return
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/${params.slug}/`)
+    authFetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/${params.slug}/`)
       .then(res => res.json())
       .then(data => {
         setService(data)

@@ -1,5 +1,5 @@
 "use client"
-
+import { authFetch } from "@/utils/authFetch"
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -22,7 +22,7 @@ export default function ServicesPage() {
   const { toast } = useToast()
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/list/`)
+    authFetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/list/`)
       .then(res => res.json())
       .then(data => setServices(data))
   }, [])
