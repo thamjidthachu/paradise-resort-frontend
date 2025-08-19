@@ -79,7 +79,7 @@ useEffect(() => {
   return (
     <div>
       {/* Review Post Form */}
-      <form onSubmit={handlePost} className="mb-8 p-4 bg-white rounded-lg shadow flex flex-col gap-4 animate-fade-in">
+      <form onSubmit={handlePost} className="mb-8 p-4 bg-white rounded-lg shadow flex flex-col gap-4 animate-fade-in dark:bg-gray-800">
         <span className="font-small">Tell others what you think</span>
         <div className="flex items-center gap-1">
           {[1,2,3,4,5].map(i => (
@@ -125,7 +125,7 @@ useEffect(() => {
         {reviews.map((review, idx) => (
           <div
             key={review.id || idx}
-            className="p-4 bg-white rounded-lg shadow animate-fade-in flex gap-4"
+            className="p-4 bg-white rounded-lg shadow animate-fade-in flex gap-4 dark:bg-gray-900"
             style={{ animationDelay: `${idx * 60}ms` }}
           >
             {/* Avatar */}

@@ -29,7 +29,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <span className="text-2xl font-bold text-primary">
-              Paradise Resort
+              The Serene Escape
             </span>
           </Link>
 
@@ -85,6 +85,7 @@ export function Navbar() {
 
           {/* Mobile menu */}
           <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
             <Link href="/cart">
               <Button variant="ghost" size="icon" className="relative">
                 <Calendar className="h-5 w-5" />

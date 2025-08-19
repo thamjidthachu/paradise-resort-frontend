@@ -46,7 +46,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <Image
             src="/resort-hero.png"
-            alt="Paradise Resort"
+            alt="The Serene Escape"
             fill
             className="object-cover"
             priority
@@ -58,12 +58,12 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
           <div className="max-w-2xl backdrop-blur-md bg-white/10 p-8 rounded-2xl border border-white/20">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-              Paradise Awaits You
+              Beyond rest, into peace.
             </h1>
             <p className="text-xl mb-8 text-white/95 drop-shadow-md">
-              Escape to luxury at Paradise Resort. Experience world-class spa
-              treatments, gourmet dining, and unforgettable adventures in tropical
-              paradise.
+              Discover harmony and elegance at The Serene Escape.
+              From peaceful retreats surrounded by nature to indulgent luxury experiences,
+              every moment is designed to refresh your soul.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/services">
@@ -166,10 +166,10 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      <section className="py-16 bg-primary text-primary-foreground  shadow-sm bg-teal-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Ready for Your Paradise Experience?
+            Ready for Your Serene Experience?
           </h2>
           <p className="text-xl mb-8 text-teal-100">
             Book your dream vacation today and create memories that will last a

@@ -90,7 +90,7 @@ export default function ServiceDetailPage() {
       <Navbar />
       <TrendingHeader />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-background">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Service Image */}
           <div className="space-y-4">

@@ -8,8 +8,8 @@ import { ThemeProvider } from '@/components/theme-provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Paradise Resort - Luxury Tropical Getaway',
-  description: 'Experience luxury at Paradise Resort with world-class spa treatments, fine dining, and exclusive activities in a tropical paradise.',
+  title: 'The Serene Escape - A peaceful place to escape stress.',
+  description: 'Discover harmony and elegance at The Serene Escape. From peaceful retreats surrounded by nature to indulgent luxury experiences, every moment is designed to refresh your soul.',
   generator: 'v0.app'
 }
 
