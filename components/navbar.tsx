@@ -1,37 +1,36 @@
 "use client"
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { Menu, X, Calendar, Search, User, Heart } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { useBooking } from '@/components/booking-provider'
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from '@/components/ui/sheet'
+import { useState } from "react"
+import Link from "next/link"
+import { Menu, Calendar, Search, User, Heart } from "lucide-react"
+import ThemeToggle from "@/components/ui/theme-toggler"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Badge } from "@/components/ui/badge"
+import { useBooking } from "@/components/booking-provider"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Separator } from './ui/separator'
+import { Separator } from "@/components/ui/separator"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const { state } = useBooking()
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'Contact', href: '/contact' },
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: "Contact", href: "/contact" },
   ]
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-background border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <span className="text-2xl font-bold text-teal-600">Paradise Resort</span>
+            <span className="text-2xl font-bold text-primary">
+              Paradise Resort
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -41,7 +40,7 @@ export function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-teal-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   {item.name}
                 </Link>
@@ -57,8 +56,13 @@ export function Navbar() {
                 placeholder="Search services..."
                 className="pl-10 pr-4"
               />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
             </div>
+          </div>
+
+          {/* Theme Toggle */}
+          <div className="hidden md:flex items-center justify-center w-16">
+            <ThemeToggle />
           </div>
 
           {/* Desktop Actions */}
@@ -66,9 +70,7 @@ export function Navbar() {
             <Button variant="ghost" size="icon">
               <Heart className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
-            </Button>
+            <AuthPopover />
             <Link href="/cart">
               <Button variant="ghost" size="icon" className="relative">
                 <Calendar className="h-5 w-5" />
@@ -81,7 +83,7 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu */}
           <div className="md:hidden flex items-center space-x-2">
             <Link href="/cart">
               <Button variant="ghost" size="icon" className="relative">
@@ -107,24 +109,30 @@ export function Navbar() {
                       placeholder="Search services..."
                       className="pl-10 pr-4"
                     />
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-4 w-4" />
                   </div>
                   {navigation.map((item) => (
-                    <><Link
-                      key={item.name}
-                      href={item.href}
-                      className="text-gray-700 hover:text-teal-600 px-3 py-2 rounded-md text-lg font-medium transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.name}
-                    </Link><Separator /></>
+                    <div key={item.name}>
+                      <Link
+                        href={item.href}
+                        className="block text-gray-700 dark:text-gray-200 hover:text-teal-600 dark:hover:text-teal-400 px-3 py-2 rounded-md text-lg font-medium transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                      <Separator />
+                    </div>
                   ))}
                   <div className="absolute bottom-8 left-5 right-5 flex flex-col gap-2">
                     <Link href="/login">
-                      <Button variant="outline" className="w-full hover:text-teal-600">Login</Button>
+                      <Button variant="outline" className="w-full hover:text-teal-600 dark:hover:text-teal-400">
+                        Login
+                      </Button>
                     </Link>
                     <Link href="/register">
-                      <Button variant="default" className="w-full hover:text-teal-600">Register</Button>
+                      <Button variant="default" className="w-full hover:text-teal-600 dark:hover:text-teal-400">
+                        Register
+                      </Button>
                     </Link>
                   </div>
                 </div>
@@ -148,10 +156,14 @@ function AuthPopover() {
       <PopoverContent align="end" className="w-40 p-2">
         <div className="flex flex-col gap-2">
           <Link href="/login">
-            <Button variant="outline" className="w-full">Login</Button>
+            <Button variant="outline" className="w-full">
+              Login
+            </Button>
           </Link>
           <Link href="/register">
-            <Button variant="default" className="w-full">Register</Button>
+            <Button variant="default" className="w-full">
+              Register
+            </Button>
           </Link>
         </div>
       </PopoverContent>

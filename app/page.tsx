@@ -36,7 +36,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <TrendingHeader />
       <Navbar />
 
@@ -82,7 +82,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-background dark:bg-background border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
@@ -117,7 +117,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Services */}
-      <section className="py-16">
+      <section className="py-16 bg-background dark:bg-background border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -136,7 +136,7 @@ export default function HomePage() {
               services.map((service) => (
                 <Card
                   key={service.id}
-                  className="group hover:shadow-lg transition-shadow"
+                  className="group hover:shadow-lg transition-shadow dark:bg-gray-900"
                 >
                   <CardContent className="p-6">
                     <div className="relative mb-4">
@@ -166,7 +166,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-teal-600 text-white">
+      <section className="py-16 bg-primary text-primary-foreground">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
             Ready for Your Paradise Experience?
