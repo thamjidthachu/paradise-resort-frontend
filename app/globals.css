@@ -121,3 +121,136 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Theme toggle styles */
+:root {
+  --switch-width: 60px;
+  --switch-height: 30px;
+  --switch-round: 25px;
+  --switch-padding-x: 3px;
+  --sunmoon-size: 24px;
+  --cloud-size: 15px;
+  --stars-size: 20px;
+}
+
+/* Switch base styles */
+.switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--switch-width);
+  height: var(--switch-height);
+  border-radius: var(--switch-round);
+  cursor: pointer;
+  background: linear-gradient(to bottom, #73bbff, #a2d1fd);
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+:is(.dark) .switch {
+  background: linear-gradient(to top, #2b3347, #181d27);
+}
+
+.switch input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Sun/Moon styles */
+.sunmoon {
+  position: absolute;
+  width: var(--sunmoon-size);
+  height: var(--sunmoon-size);
+  border-radius: 50%;
+  background-color: #FFC187;
+  left: var(--switch-padding-x);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+:is(.dark) .sunmoon {
+  transform: translateX(calc(var(--switch-width) - var(--sunmoon-size) - (2 * var(--switch-padding-x))));
+  background-color: #ffffff;
+}
+
+/* Cloud styles */
+.clouds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  width: var(--cloud-size) !important;
+  height: var(--cloud-size) !important;
+  transition: all 0.5s ease;
+}
+
+.cloud-1 {
+  bottom: 2px;
+  left: 10px;
+}
+
+.cloud-2 {
+  bottom: 4px;
+  left: 20px;
+}
+
+.cloud-3 {
+  bottom: 6px;
+  right: 20px;
+}
+
+.cloud-4 {
+  bottom: 2px;
+  right: 10px;
+}
+
+:is(.dark) .cloud {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* Stars styles */
+.stars {
+  position: absolute;
+  width: var(--stars-size) !important;
+  height: var(--stars-size) !important;
+  opacity: 0;
+  transition: all 0.5s ease;
+  right: 10px;
+  top: 5px;
+}
+
+:is(.dark) .stars {
+  opacity: 1;
+}
+
+/* Dark mode text and background colors */
+:is(.dark) {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Ensure proper dark mode styles for components */
+:is(.dark) .bg-white {
+  background-color: var(--background);
+}
+
+:is(.dark) .text-gray-700 {
+  color: var(--foreground);
+}
+
+:is(.dark) .border-gray-200 {
+  border-color: var(--border);
+}

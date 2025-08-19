@@ -36,8 +36,8 @@ export default function ProfilePage() {
 
   return (
     <div>
-      <TrendingHeader />
       <Navbar />
+      <TrendingHeader />
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-100 to-white">
       <Card className="w-full max-w-md shadow-xl animate-fade-in">
         <CardContent className="p-8 flex flex-col items-center">

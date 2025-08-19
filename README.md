@@ -1,2 +1,1 @@
-# paradise-resort-frontend
-Escape to luxury at Paradise Resort. Experience world-class spa treatments, gourmet dining, and unforgettable adventures in tropical paradise.
+Discover harmony and elegance at The Serene Escape. From peaceful retreats surrounded by nature to indulgent luxury experiences, every moment is designed to refresh your soul.

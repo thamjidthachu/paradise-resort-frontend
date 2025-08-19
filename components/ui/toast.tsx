@@ -6,6 +6,28 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useToast } from '@/hooks/use-toast'
+import { useRouter } from 'next/router';
+
+const useApiResponseHandler = () => {
+  const toast = useToast();
+  const router = useRouter();
+
+const handleApiResponse = (response: any) => {
+  if (response.code === 'token_not_valid') {
+    toast.toast({
+      title: 'Session expired, please login',
+      description: 'Your session has expired. Please login to continue.',
+      variant: 'destructive',
+    });
+    router.push('/login');
+  }
+};
+
+  return { handleApiResponse };
+};
+
+export default useApiResponseHandler;
 
 const ToastProvider = ToastPrimitives.Provider
 

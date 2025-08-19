@@ -56,10 +56,9 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <TrendingHeader />
       <Navbar />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <TrendingHeader />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-background">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Resort Services</h1>
           {/* Filters */}
@@ -92,7 +91,7 @@ export default function ServicesPage() {
         {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredServices.map((service) => (
-            <Card key={service.slug} className="group hover:shadow-lg transition-shadow">
+            <Card key={service.slug} className="group hover:shadow-lg transition-shadow dark:bg-gray-800">
               <CardContent className="p-6">
                 <div className="relative mb-4">
                   <Image

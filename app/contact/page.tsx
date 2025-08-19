@@ -33,12 +33,12 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <TrendingHeader />
       <Navbar />
+      <TrendingHeader />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Contact Paradise Resort</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Contact The Serene Escape</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Planning your perfect getaway? Our dedicated concierge team is here to help you create unforgettable memories.
           </p>
@@ -53,7 +53,7 @@ export default function ContactPage() {
                   <Mail className="h-6 w-6 text-teal-600 mr-3" />
                   <div>
                     <h3 className="font-semibold">Email Us</h3>
-                    <p className="text-gray-600">info@paradiseresort.com</p>
+                    <p className="text-gray-600">info@thesereneescape.com</p>
                     <p className="text-sm text-gray-500">Response within 2 hours</p>
                   </div>
                 </div>
@@ -80,9 +80,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold">Visit Us</h3>
                     <p className="text-gray-600">
-                      Paradise Island<br />
-                      North Malé Atoll<br />
-                      Maldives 20026
+                      Al Reem Island<br />
+                      Abu Dhabi, UAE
                     </p>
                   </div>
                 </div>

@@ -6,8 +6,8 @@ import { Card, CardContent } from '@/components/ui/card'
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <TrendingHeader />
       <Navbar />
+      <TrendingHeader />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center mb-8">
@@ -20,14 +20,14 @@ export default function TermsPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-4">1. Acceptance of Terms</h2>
               <p className="mb-4">
-                By booking services at Paradise Resort ("we," "our," or "us"), you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to abide by the above, please do not use our services.
+                By booking services at The Serene Escape ("we," "our," or "us"), you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to abide by the above, please do not use our services.
               </p>
             </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-4">2. Booking and Reservations</h2>
               <p className="mb-4">
-                All bookings are subject to availability and confirmation by Paradise Resort. We reserve the right to refuse service to anyone for any reason at any time.
+                All bookings are subject to availability and confirmation by The Serene Escape. We reserve the right to refuse service to anyone for any reason at any time.
               </p>
               <ul className="list-disc pl-6 mb-4">
                 <li>Bookings must be made by guests 18 years or older</li>
@@ -86,21 +86,21 @@ export default function TermsPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-4">7. Privacy and Photography</h2>
               <p className="mb-4">
-                Paradise Resort may take photographs or videos of guests for promotional purposes. By staying with us, you consent to such use unless you specifically opt out.
+                The Serene Escape may take photographs or videos of guests for promotional purposes. By staying with us, you consent to such use unless you specifically opt out.
               </p>
             </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-4">8. Force Majeure</h2>
               <p className="mb-4">
-                Paradise Resort shall not be liable for any failure to perform due to unforeseen circumstances or causes beyond our reasonable control, including but not limited to acts of God, natural disasters, war, terrorism, or government regulations.
+                The Serene Escape shall not be liable for any failure to perform due to unforeseen circumstances or causes beyond our reasonable control, including but not limited to acts of God, natural disasters, war, terrorism, or government regulations.
               </p>
             </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-4">9. Limitation of Liability</h2>
               <p className="mb-4">
-                Paradise Resort's liability is limited to the amount paid for services. We are not responsible for indirect, incidental, or consequential damages.
+                The Serene Escape's liability is limited to the amount paid for services. We are not responsible for indirect, incidental, or consequential damages.
               </p>
             </section>
 
@@ -116,9 +116,9 @@ export default function TermsPage() {
               <p className="mb-4">
                 If you have any questions about these Terms & Conditions, please contact us at:
               </p>
-              <p className="mb-2">Email: legal@paradiseresort.com</p>
+              <p className="mb-2">Email: legal@theserenescape.com</p>
               <p className="mb-2">Phone: +960 123-4567</p>
-              <p>Address: Paradise Island, North Malé Atoll, Maldives 20026</p>
+              <p>Address: Al-Reem Island, Abu Dhabi, UAE 00000</p>
             </section>
           </CardContent>
         </Card>

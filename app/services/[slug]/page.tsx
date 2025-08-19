@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Star, Calendar, Clock, Users, MapPin, Shield, RotateCcw } from "lucide-react"
+import { Star, Calendar, Clock, Users, MapPin } from "lucide-react"
 import { TrendingHeader } from "@/components/trending-header"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -54,9 +54,6 @@ export default function ServiceDetailPage() {
     )
   }
 
-  // Static placeholders
-  const price = service.price ?? 0
-
   const bookService = () => {
     if (!selectedDate || !selectedTime) {
       toast({
@@ -90,10 +87,10 @@ export default function ServiceDetailPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <TrendingHeader />
       <Navbar />
+      <TrendingHeader />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-background">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Service Image */}
           <div className="space-y-4">
@@ -150,7 +147,7 @@ export default function ServiceDetailPage() {
               </div>
               <div className="flex items-center space-x-4 mb-6">
                 <span className="text-3xl font-bold text-teal-600">
-                  ${price}
+                  ${service.price ?? 0}
                 </span>
                 <span className="text-lg text-gray-500">
                   per {service.unit || "unit"}
@@ -221,7 +218,7 @@ export default function ServiceDetailPage() {
                 size="lg"
               >
                 <Calendar className="h-5 w-5 mr-2" />
-                Book Now - ${price * quantity}
+                Book Now - ${service.price ?? 0 * quantity}
               </Button>
             </div>
             <Separator />

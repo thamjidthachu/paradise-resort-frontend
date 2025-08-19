@@ -19,27 +19,29 @@ export function ReviewSection({ serviceSlug }: { serviceSlug: string }) {
   const [nextUrl, setNextUrl] = useState<string | null>(null)
 
   // Fetch reviews with pagination
-  useEffect(() => {
-    setLoading(true)
-    const url = nextUrl || `${process.env.NEXT_PUBLIC_API_BASE_URL}/services/${serviceSlug}/reviews/?page=${page}`
-    authFetch(url)
-      .then(res => res.json())
-      .then(data => {
-        // If paginated, use results and next
-        if (Array.isArray(data.results)) {
-          setReviews(prev => [...prev, ...data.results])
-          setHasMore(!!data.next)
-          setNextUrl(data.next)
-        } else {
-          setReviews(prev => [...prev, ...(data.results || [])])
-          setHasMore(!!data.next)
-          setNextUrl(data.next)
-        }
-        setLoading(false)
-      })
-      .catch(() => setLoading(false))
-    // eslint-disable-next-line
-  }, [page, serviceSlug])
+useEffect(() => {
+  let isMounted = true
+  setLoading(true)
+  const url = nextUrl || `${process.env.NEXT_PUBLIC_API_BASE_URL}/services/${serviceSlug}/reviews/?page=${page}`
+  authFetch(url)
+    .then(res => res.json())
+    .then(data => {
+      if (!isMounted) return
+      if (Array.isArray(data.results)) {
+        setReviews(prev => [...prev, ...data.results])
+      } else {
+        setReviews(prev => [...prev, ...(data.results || [])])
+      }
+      setHasMore(!!data.next)
+      setNextUrl(data.next)
+      setLoading(false)
+    })
+    .catch(() => setLoading(false))
+
+  return () => {
+    isMounted = false
+  }
+}, [page, serviceSlug])
 
   // Scroll to new reviews when loaded
   useEffect(() => {
@@ -77,7 +79,7 @@ export function ReviewSection({ serviceSlug }: { serviceSlug: string }) {
   return (
     <div>
       {/* Review Post Form */}
-      <form onSubmit={handlePost} className="mb-8 p-4 bg-white rounded-lg shadow flex flex-col gap-4 animate-fade-in">
+      <form onSubmit={handlePost} className="mb-8 p-4 bg-white rounded-lg shadow flex flex-col gap-4 animate-fade-in dark:bg-gray-800">
         <span className="font-small">Tell others what you think</span>
         <div className="flex items-center gap-1">
           {[1,2,3,4,5].map(i => (
@@ -123,24 +125,24 @@ export function ReviewSection({ serviceSlug }: { serviceSlug: string }) {
         {reviews.map((review, idx) => (
           <div
             key={review.id || idx}
-            className="p-4 bg-white rounded-lg shadow animate-fade-in flex gap-4"
+            className="p-4 bg-white rounded-lg shadow animate-fade-in flex gap-4 dark:bg-gray-900"
             style={{ animationDelay: `${idx * 60}ms` }}
           >
             {/* Avatar */}
             <div className="flex-shrink-0">
               <Image
-                src="/placeholder-user.jpg"
+                src={review.author?.avatar || "/placeholder-user.jpg"}
                 alt={review.author?.username || "User"}
                 width={40}
                 height={40}
-                className="rounded-full object-cover"
+                className="w-10 h-10 rounded-full object-cover"
               />
             </div>
             {/* Review Content */}
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <span className="font-semibold text-gray-800">{review.author?.username || "Anonymous"}</span>
-                <span className="text-xs text-gray-400">{review.comment_time ? formatDate(review.comment_time) : ""}</span>
+                <span className="font-semibold text-gray-800">@{review.author?.username || "Anonymous"}</span>
+                <span className="text-xs text-gray-400">{review.created_at ? formatDate(review.created_at) : ""}</span>
               </div>
               <div className="flex items-center gap-1 mb-2">
                 {[1,2,3,4,5].map(i => (

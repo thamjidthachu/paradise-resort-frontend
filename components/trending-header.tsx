@@ -1,33 +1,41 @@
 "use client"
 
-import { useState, useEffect } from 'react'
-import { X } from 'lucide-react'
-
-const trendingMessages = [
-  "🌺 Summer Special: 30% off all spa treatments!",
-  "🏖️ Book 3 nights, get 1 night free - Limited time offer",
-  "🍽️ New beachfront restaurant now open with sunset dining",
-  "🏄‍♂️ Adventure package: Water sports + Island tour included"
-]
+import { useState, useEffect } from "react"
+import { X } from "lucide-react"
 
 export function TrendingHeader() {
+  const [advertisingMessages, setAdvertisingMessages] = useState<any[]>([])
   const [currentMessage, setCurrentMessage] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
 
+  // Fetch messages from API
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentMessage((prev) => (prev + 1) % trendingMessages.length)
-    }, 4000)
-    return () => clearInterval(interval)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/advertisement/`)
+      .then((res) => res.json())
+      .then((data) => {
+        // Only keep active messages
+        const active = data.filter((item: any) => item.is_active)
+        setAdvertisingMessages(active)
+      })
+      .catch((err) => console.error("Failed to fetch advertisements:", err))
   }, [])
 
-  if (!isVisible) return null
+  // Rotate messages
+  useEffect(() => {
+    if (advertisingMessages.length === 0) return
+    const interval = setInterval(() => {
+      setCurrentMessage((prev) => (prev + 1) % advertisingMessages.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [advertisingMessages])
+
+  if (!isVisible || advertisingMessages.length === 0) return null
 
   return (
     <div className="bg-gradient-to-r from-teal-600 to-blue-600 text-white py-2 px-4 text-center relative">
       <div className="flex items-center justify-center">
         <p className="text-sm font-medium animate-pulse">
-          {trendingMessages[currentMessage]}
+          {advertisingMessages[currentMessage]?.title}
         </p>
         <button
           onClick={() => setIsVisible(false)}

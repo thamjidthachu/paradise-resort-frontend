@@ -9,8 +9,8 @@ import Link from 'next/link'
 export default function CancellationPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <TrendingHeader />
       <Navbar />
+      <TrendingHeader />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center mb-8">
@@ -58,7 +58,7 @@ export default function CancellationPage() {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4">Cancellation Policy Overview</h2>
                 <p className="mb-4">
-                  At Paradise Resort, we understand that travel plans can change. Our flexible cancellation policy is designed to provide you with peace of mind while ensuring fair treatment for all our guests.
+                  At The Serene Escape, we understand that travel plans can change. Our flexible cancellation policy is designed to provide you with peace of mind while ensuring fair treatment for all our guests.
                 </p>
               </section>
 
@@ -112,7 +112,7 @@ export default function CancellationPage() {
                 <ol className="list-decimal pl-6 space-y-2">
                   <li><strong>Online:</strong> Log into your account and manage your bookings</li>
                   <li><strong>Phone:</strong> Call our 24/7 concierge at +960 123-4567</li>
-                  <li><strong>Email:</strong> Send your booking confirmation to cancellations@paradiseresort.com</li>
+                  <li><strong>Email:</strong> Send your booking confirmation to cancellations@theserenescape.com</li>
                   <li><strong>In-Person:</strong> Visit our front desk if you're already at the resort</li>
                 </ol>
               </section>
