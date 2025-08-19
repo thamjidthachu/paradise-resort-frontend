@@ -13,6 +13,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Separator } from './ui/separator'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -95,12 +96,12 @@ export function Navbar() {
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-8 w-8" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <div className="flex flex-col space-y-4 mt-8">
-                  <div className="relative">
+                <div className="flex flex-col mt-8">
+                  <div className="relative mx-2 my-4">
                     <Input
                       type="text"
                       placeholder="Search services..."
@@ -109,21 +110,21 @@ export function Navbar() {
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   </div>
                   {navigation.map((item) => (
-                    <Link
+                    <><Link
                       key={item.name}
                       href={item.href}
                       className="text-gray-700 hover:text-teal-600 px-3 py-2 rounded-md text-lg font-medium transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.name}
-                    </Link>
+                    </Link><Separator /></>
                   ))}
                   <div className="absolute bottom-8 left-5 right-5 flex flex-col gap-2">
                     <Link href="/login">
-                      <Button variant="outline" className="w-full">Login</Button>
+                      <Button variant="outline" className="w-full hover:text-teal-600">Login</Button>
                     </Link>
                     <Link href="/register">
-                      <Button variant="default" className="w-full">Register</Button>
+                      <Button variant="default" className="w-full hover:text-teal-600">Register</Button>
                     </Link>
                   </div>
                 </div>

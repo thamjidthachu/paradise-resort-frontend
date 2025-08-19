@@ -142,7 +142,7 @@ useEffect(() => {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
                 <span className="font-semibold text-gray-800">@{review.author?.username || "Anonymous"}</span>
-                <span className="text-xs text-gray-400">{review.comment_time ? formatDate(review.comment_time) : ""}</span>
+                <span className="text-xs text-gray-400">{review.created_at ? formatDate(review.created_at) : ""}</span>
               </div>
               <div className="flex items-center gap-1 mb-2">
                 {[1,2,3,4,5].map(i => (

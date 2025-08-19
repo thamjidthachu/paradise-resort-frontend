@@ -67,20 +67,15 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/services">
-                <Button
-                  size="lg"
-                  className="bg-white text-teal-600 hover:bg-gray-100 shadow-lg"
-                >
+                <Button variant="outline" className="w-full text-gray-700 hover:text-teal-600">
                   Explore Services
                 </Button>
               </Link>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-teal-600 backdrop-blur-sm"
-              >
-                View Gallery
-              </Button>
+              <Link href="/services">
+                <Button variant="outline" className="w-full text-gray-700 hover:text-teal-600">
+                  View Gallery
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -182,22 +177,14 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/services">
-              <Button
-                size="lg"
-                className="bg-white text-teal-600 hover:bg-gray-100"
-              >
-                <Calendar className="h-5 w-5 mr-2" />
-                Book Services
-              </Button>
+              <Button variant="outline" className="w-full text-gray-700 hover:text-teal-600">
+                  Book Services
+                </Button>
             </Link>
             <Link href="/contact">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-teal-600"
-              >
-                Contact Us
-              </Button>
+              <Button variant="outline" className="w-full text-gray-700 hover:text-teal-600">
+                  Contact Us
+                </Button>
             </Link>
           </div>
         </div>
