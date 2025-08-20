@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -14,17 +14,32 @@ import { TrendingHeader } from '@/components/trending-header'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { useBooking } from '@/components/booking-provider'
+import { useCart } from "@/components/cart-provider"
 
 export default function CheckoutPage() {
   const { state, dispatch } = useBooking()
   const router = useRouter()
+  const { items } = useCart()
+  const [isClient, setIsClient] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState('card')
+  const [mounted, setMounted] = useState(false)
 
   const subtotal = state.total
   const resortFee = subtotal * 0.1
   const tax = subtotal * 0.08
   const total = subtotal + resortFee + tax
+
+  useEffect(() => {
+    setMounted(true)
+    if (!items || items.length === 0) {
+      router.push("/cart")
+    }
+  }, [items, router])
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,9 +59,18 @@ export default function CheckoutPage() {
     }, 2000)
   }
 
-  if (state.items.length === 0) {
-    router.push('/cart')
-    return null
+  // Show loading or placeholder during SSR
+  if (!mounted) {
+    return (
+      <div className="container mx-auto py-8">
+        <Card className="p-6">
+          <div className="animate-pulse">
+            <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+          </div>
+        </Card>
+      </div>
+    )
   }
 
   return (

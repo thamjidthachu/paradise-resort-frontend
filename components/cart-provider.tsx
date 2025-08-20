@@ -1,95 +1,116 @@
 "use client"
 
-import { createContext, useContext, useReducer, ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState } from "react"
 
-interface Product {
-  id: string
+interface CartItem {
+  id: string | number
   name: string
   price: number
-  image: string
-  category: string
-}
-
-interface CartItem extends Product {
   quantity: number
 }
 
-interface CartState {
+interface CartContextType {
   items: CartItem[]
+  addItem: (item: CartItem) => void
+  removeItem: (itemId: string | number) => void
+  updateQuantity: (itemId: string | number, quantity: number) => void
+  clearCart: () => void
   total: number
 }
 
-type CartAction = 
-  | { type: 'ADD_ITEM'; payload: Product }
-  | { type: 'REMOVE_ITEM'; payload: string }
-  | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
-  | { type: 'CLEAR_CART' }
+const CartContext = createContext<CartContextType | undefined>(undefined)
 
-const CartContext = createContext<{
-  state: CartState
-  dispatch: React.Dispatch<CartAction>
-} | null>(null)
+const CART_STORAGE_KEY = 'paradise-resort-cart'
 
-function cartReducer(state: CartState, action: CartAction): CartState {
-  switch (action.type) {
-    case 'ADD_ITEM': {
-      const existingItem = state.items.find(item => item.id === action.payload.id)
+export function CartProvider({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false)
+  const [items, setItems] = useState<CartItem[]>([])
+
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    try {
+      const savedCart = localStorage.getItem(CART_STORAGE_KEY)
+      if (savedCart) {
+        setItems(JSON.parse(savedCart))
+      }
+    } catch (error) {
+      console.error('Failed to load cart:', error)
+    }
+    setMounted(true)
+  }, [])
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    if (mounted) {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items))
+    }
+  }, [items, mounted])
+
+  const addItem = (newItem: CartItem) => {
+    setItems(currentItems => {
+      const existingItem = currentItems.find(item => item.id === newItem.id)
       if (existingItem) {
-        const updatedItems = state.items.map(item =>
-          item.id === action.payload.id
-            ? { ...item, quantity: item.quantity + 1 }
+        return currentItems.map(item =>
+          item.id === newItem.id
+            ? { ...item, quantity: item.quantity + (newItem.quantity || 1) }
             : item
         )
-        return {
-          items: updatedItems,
-          total: updatedItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-        }
-      } else {
-        const newItems = [...state.items, { ...action.payload, quantity: 1 }]
-        return {
-          items: newItems,
-          total: newItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-        }
       }
-    }
-    case 'REMOVE_ITEM': {
-      const newItems = state.items.filter(item => item.id !== action.payload)
-      return {
-        items: newItems,
-        total: newItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-      }
-    }
-    case 'UPDATE_QUANTITY': {
-      const updatedItems = state.items.map(item =>
-        item.id === action.payload.id
-          ? { ...item, quantity: action.payload.quantity }
-          : item
-      ).filter(item => item.quantity > 0)
-      return {
-        items: updatedItems,
-        total: updatedItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-      }
-    }
-    case 'CLEAR_CART':
-      return { items: [], total: 0 }
-    default:
-      return state
+      return [...currentItems, { ...newItem, quantity: newItem.quantity || 1 }]
+    })
   }
-}
 
-export function CartProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(cartReducer, { items: [], total: 0 })
+  const removeItem = (itemId: string | number) => {
+    setItems(currentItems => currentItems.filter(item => item.id !== itemId))
+  }
 
-  return (
-    <CartContext.Provider value={{ state, dispatch }}>
-      {children}
-    </CartContext.Provider>
-  )
+  const updateQuantity = (itemId: string | number, quantity: number) => {
+    setItems(currentItems =>
+      currentItems.map(item =>
+        item.id === itemId
+          ? { ...item, quantity: Math.max(0, quantity) }
+          : item
+      )
+    )
+  }
+
+  const clearCart = () => {
+    setItems([])
+  }
+
+  const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+
+  const value = {
+    items,
+    addItem,
+    removeItem,
+    updateQuantity,
+    clearCart,
+    total
+  }
+
+  // During SSR or initial mount, return a placeholder provider
+  if (!mounted) {
+    return (
+      <CartContext.Provider value={{
+        items: [],
+        addItem: () => {},
+        removeItem: () => {},
+        updateQuantity: () => {},
+        clearCart: () => {},
+        total: 0
+      }}>
+        {children}
+      </CartContext.Provider>
+    )
+  }
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
 
 export function useCart() {
   const context = useContext(CartContext)
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useCart must be used within a CartProvider')
   }
   return context
