@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -44,10 +45,11 @@ export default function CheckoutPage() {
     }, 2000)
   }
 
-  if (state.items.length === 0) {
-    router.push('/cart')
-    return null
-  }
+  useEffect(() => {
+    if (state.items.length === 0) {
+      router.push('/cart')
+    }
+  }, [state.items, router])
 
   return (
     <div className="min-h-screen bg-gray-50">

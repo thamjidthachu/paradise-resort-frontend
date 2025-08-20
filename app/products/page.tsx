@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -16,8 +16,17 @@ import { useCart } from '@/components/cart-provider'
 import { useToast } from '@/hooks/use-toast'
 
 export default function ProductsPage() {
+  const [isClient, setIsClient] = useState(false)
   const [sortBy, setSortBy] = useState('name')
   const [filterBy, setFilterBy] = useState('all')
+
+  // Only render after client mounts
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) return null
+
   const { dispatch } = useCart()
   const { toast } = useToast()
 
@@ -50,11 +59,11 @@ export default function ProductsPage() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <TrendingHeader />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">All Products</h1>
-          
+
           {/* Filters */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <Select value={filterBy} onValueChange={setFilterBy}>
@@ -69,7 +78,7 @@ export default function ProductsPage() {
                 ))}
               </SelectContent>
             </Select>
-            
+
             <Select value={sortBy} onValueChange={setSortBy}>
               <SelectTrigger className="w-full sm:w-48">
                 <SelectValue placeholder="Sort by" />
@@ -108,17 +117,17 @@ export default function ProductsPage() {
                     </Badge>
                   )}
                 </div>
-                
+
                 <div className="mb-2">
                   <Badge variant="secondary" className="text-xs">
                     {product.category}
                   </Badge>
                 </div>
-                
+
                 <h3 className="font-semibold text-lg mb-2 group-hover:text-purple-600 transition-colors">
                   {product.name}
                 </h3>
-                
+
                 <div className="flex items-center mb-2">
                   <div className="flex items-center">
                     {[...Array(5)].map((_, i) => (
@@ -134,11 +143,11 @@ export default function ProductsPage() {
                   </div>
                   <span className="text-sm text-gray-500 ml-2">({product.reviews})</span>
                 </div>
-                
+
                 <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                   {product.description}
                 </p>
-                
+
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-2">
                     <span className="text-xl font-bold text-purple-600">
@@ -151,7 +160,7 @@ export default function ProductsPage() {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="flex gap-2">
                   <Link href={`/products/${product.id}`} className="flex-1">
                     <Button variant="outline" className="w-full">
