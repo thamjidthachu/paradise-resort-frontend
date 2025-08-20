@@ -23,14 +23,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider>
-          <CartProvider> {/* <-- wrap your app here */}
-            <BookingProvider>
+          <BookingProvider>
+            <CartProvider>
               <main className="min-h-screen bg-background font-sans antialiased">
                 {children}
               </main>
-              <Toaster />
-            </BookingProvider>
-          </CartProvider>
+            </CartProvider>
+          </BookingProvider>
         </ThemeProvider>
       </body>
     </html>

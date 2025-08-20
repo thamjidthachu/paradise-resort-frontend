@@ -1,4 +1,5 @@
 "use client"
+
 import { authFetch } from "@/utils/authFetch"
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
@@ -14,27 +15,64 @@ import { Footer } from '@/components/footer'
 import { useBooking } from '@/components/booking-provider'
 import { useToast } from '@/hooks/use-toast'
 
+interface ServiceFile {
+  id: number
+  images: string
+}
+
+interface Service {
+  slug: string
+  name: string
+  synopsis: string
+  category?: string
+  rating?: number
+  review_count?: number
+  time?: number
+  price?: number
+  unit?: string
+  files?: ServiceFile[]
+}
+
 export default function ServicesPage() {
-  const [services, setServices] = useState<any[]>([])
+  const [services, setServices] = useState<Service[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [sortBy, setSortBy] = useState('name')
   const [filterBy, setFilterBy] = useState('all')
   const { dispatch } = useBooking()
   const { toast } = useToast()
 
   useEffect(() => {
-    authFetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/list/`)
-      .then(res => res.json())
-      .then(data => setServices(data))
-  }, [])
+    const fetchServices = async () => {
+      try {
+        setLoading(true)
+        const res = await authFetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/list/`)
+        if (!res.ok) throw new Error('Failed to fetch services')
+        const data = await res.json()
+        setServices(data)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load services')
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Failed to load services. Please try again later.",
+        })
+      } finally {
+        setLoading(false)
+      }
+    }
 
-  // If your API does not provide category, this will just be ['all']
+    fetchServices()
+  }, [toast])
+
+  // Get categories only if services exist
   const categories = ['all', ...Array.from(new Set(services.map(s => s.category).filter(Boolean)))]
 
+  // Only filter and sort if we have services
   const filteredServices = services
     .filter(service => filterBy === 'all' || service.category === filterBy)
     .sort((a, b) => {
       switch (sortBy) {
-        // Static price/rating for now, update when API provides
         case 'price-low':
           return (a.price ?? 0) - (b.price ?? 0)
         case 'price-high':
@@ -54,6 +92,47 @@ export default function ServicesPage() {
     })
   }
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <TrendingHeader />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <Card key={i} className="animate-pulse">
+                <CardContent className="p-6">
+                  <div className="h-48 bg-gray-200 rounded-lg mb-4"></div>
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <TrendingHeader />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            {error}
+          </h2>
+          <Button onClick={() => window.location.reload()}>
+            Try Again
+          </Button>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
@@ -69,7 +148,7 @@ export default function ServicesPage() {
               </SelectTrigger>
               <SelectContent>
                 {categories.map(category => (
-                  <SelectItem key={category} value={category}>
+                  <SelectItem key={category} value={category || "all"}>
                     {category === 'all' ? 'All Categories' : category}
                   </SelectItem>
                 ))}

@@ -28,7 +28,7 @@ export default function ProductsPage() {
 
   if (!isClient) return null
 
-  const { dispatch } = useCart()
+  const { addItem } = useCart()
   const { toast } = useToast()
 
   const categories = ['all', ...Array.from(new Set(products.map(p => p.category)))]
@@ -49,7 +49,7 @@ export default function ProductsPage() {
     })
 
   const addToCart = (product: any) => {
-    dispatch({ type: 'ADD_ITEM', payload: product })
+    addItem(product)
     toast({
       title: "Added to cart",
       description: `${product.name} has been added to your cart.`,
