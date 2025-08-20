@@ -60,7 +60,7 @@ export default function ServicesPage() {
       <TrendingHeader />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-background">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Resort Services</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4 dark:text-white">Resort Services</h1>
           {/* Filters */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <Select value={filterBy} onValueChange={setFilterBy}>

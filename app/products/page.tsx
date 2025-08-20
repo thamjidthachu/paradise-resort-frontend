@@ -14,6 +14,7 @@ import { Footer } from '@/components/footer'
 import { products } from '@/lib/products'
 import { useCart } from '@/components/cart-provider'
 import { useToast } from '@/hooks/use-toast'
+import ProductsList from "./products-list"
 
 export default function ProductsPage() {
   const [isClient, setIsClient] = useState(false)
@@ -93,93 +94,8 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.map((product) => (
-            <Card key={product.id} className="group hover:shadow-lg transition-shadow">
-              <CardContent className="p-4">
-                <div className="relative mb-4">
-                  <Image
-                    src={product.image || "/placeholder.svg"}
-                    alt={product.name}
-                    width={300}
-                    height={300}
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
-                  {product.originalPrice && (
-                    <Badge className="absolute top-2 left-2 bg-red-500">
-                      Sale
-                    </Badge>
-                  )}
-                  {!product.inStock && (
-                    <Badge className="absolute top-2 right-2 bg-gray-500">
-                      Out of Stock
-                    </Badge>
-                  )}
-                </div>
-
-                <div className="mb-2">
-                  <Badge variant="secondary" className="text-xs">
-                    {product.category}
-                  </Badge>
-                </div>
-
-                <h3 className="font-semibold text-lg mb-2 group-hover:text-purple-600 transition-colors">
-                  {product.name}
-                </h3>
-
-                <div className="flex items-center mb-2">
-                  <div className="flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-4 w-4 ${
-                          i < Math.floor(product.rating)
-                            ? 'text-yellow-400 fill-current'
-                            : 'text-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm text-gray-500 ml-2">({product.reviews})</span>
-                </div>
-
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                  {product.description}
-                </p>
-
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xl font-bold text-purple-600">
-                      ${product.price}
-                    </span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-gray-500 line-through">
-                        ${product.originalPrice}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex gap-2">
-                  <Link href={`/products/${product.id}`} className="flex-1">
-                    <Button variant="outline" className="w-full">
-                      View Details
-                    </Button>
-                  </Link>
-                  <Button
-                    onClick={() => addToCart(product)}
-                    disabled={!product.inStock}
-                    className="flex-1"
-                  >
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    Add to Cart
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        {/* Products List */}
+        <ProductsList />
       </div>
 
       <Footer />
