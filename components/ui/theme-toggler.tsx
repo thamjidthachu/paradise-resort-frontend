@@ -17,7 +17,7 @@ export default function ThemeToggle() {
   }
 
   return (
-    <label className="switch">
+    <label className="switch gap-2">
       <input 
         type="checkbox" 
         checked={theme === 'dark'}
@@ -40,14 +40,14 @@ export default function ThemeToggle() {
           className="cloud cloud-2" 
         />
         <Image 
-          src="/cloud_3.svg" 
+          src="/cloud_1.svg" 
           alt="cloud" 
           width={15} 
           height={15} 
           className="cloud cloud-3" 
         />
         <Image 
-          src="/cloud_4.svg" 
+          src="/cloud_2.svg" 
           alt="cloud" 
           width={15} 
           height={15} 

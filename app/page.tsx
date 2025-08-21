@@ -55,7 +55,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <Image
             src="/resort-hero.png"
-            alt="The Serene Escape"
+            alt="Azure Horizon"
             fill
             className="object-cover"
             priority
@@ -70,7 +70,7 @@ export default function HomePage() {
               Beyond rest, into peace.
             </h1>
             <p className="text-xl mb-8 text-white/95 drop-shadow-md">
-              Discover harmony and elegance at The Serene Escape.
+              Discover harmony and elegance at Azure Horizon.
               From peaceful retreats surrounded by nature to indulgent luxury experiences,
               every moment is designed to refresh your soul.
             </p>
@@ -197,7 +197,7 @@ export default function HomePage() {
       <section className="py-16 bg-primary text-primary-foreground  shadow-sm bg-teal-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Ready for Your Serene Experience?
+            Ready for Your Azure Experience?
           </h2>
           <p className="text-xl mb-8 text-teal-100">
             Book your dream vacation today and create memories that will last a

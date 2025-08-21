@@ -23,7 +23,7 @@ export default function PaymentSuccessPage() {
                 Booking Confirmed!
               </h1>
               <p className="text-gray-600">
-                Your Serene experience has been successfully booked. Get ready for an unforgettable getaway!
+                Your Azure experience has been successfully booked. Get ready for an unforgettable getaway!
               </p>
             </div>
 
@@ -44,7 +44,7 @@ export default function PaymentSuccessPage() {
               <div className="flex items-center justify-center p-4 bg-blue-50 rounded-lg">
                 <MapPin className="h-6 w-6 text-blue-600 mr-3" />
                 <div className="text-left">
-                  <p className="font-medium text-blue-900">The Serene Escape</p>
+                  <p className="font-medium text-blue-900">Azure Horizon</p>
                   <p className="text-sm text-blue-600">Al-Reem Island, Abu Dhabi</p>
                 </div>
               </div>
@@ -52,7 +52,7 @@ export default function PaymentSuccessPage() {
 
             <div className="space-y-4">
               <p className="text-gray-600">
-                We're excited to welcome you to The Serene Escape! Please arrive 15 minutes before your scheduled services.
+                We're excited to welcome you to Azure Horizon! Please arrive 15 minutes before your scheduled services.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

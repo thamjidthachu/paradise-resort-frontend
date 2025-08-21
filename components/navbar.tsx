@@ -29,7 +29,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <span className="text-2xl font-bold text-primary">
-              The Serene Escape
+              Azure Horizon
             </span>
           </Link>
 
@@ -84,7 +84,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile menu */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="md:hidden flex items-center space-x-1 ml-2">
             <ThemeToggle />
             <Link href="/cart">
               <Button variant="ghost" size="icon" className="relative">

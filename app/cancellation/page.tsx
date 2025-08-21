@@ -12,10 +12,10 @@ export default function CancellationPage() {
       <Navbar />
       <TrendingHeader />
       
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-black">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Cancellation Policy</h1>
-          <p className="text-gray-600">Understanding our flexible cancellation and refund policies</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4 dark:text-white">Cancellation Policy</h1>
+          <p className="text-gray-600 dark:text-white">Understanding our flexible cancellation and refund policies</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -58,7 +58,7 @@ export default function CancellationPage() {
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4">Cancellation Policy Overview</h2>
                 <p className="mb-4">
-                  At The Serene Escape, we understand that travel plans can change. Our flexible cancellation policy is designed to provide you with peace of mind while ensuring fair treatment for all our guests.
+                  At Azure Horizon, we understand that travel plans can change. Our flexible cancellation policy is designed to provide you with peace of mind while ensuring fair treatment for all our guests.
                 </p>
               </section>
 
@@ -112,7 +112,7 @@ export default function CancellationPage() {
                 <ol className="list-decimal pl-6 space-y-2">
                   <li><strong>Online:</strong> Log into your account and manage your bookings</li>
                   <li><strong>Phone:</strong> Call our 24/7 concierge at +960 123-4567</li>
-                  <li><strong>Email:</strong> Send your booking confirmation to cancellations@theserenescape.com</li>
+                  <li><strong>Email:</strong> Send your booking confirmation to cancellations@azurehorizon.com</li>
                   <li><strong>In-Person:</strong> Visit our front desk if you're already at the resort</li>
                 </ol>
               </section>

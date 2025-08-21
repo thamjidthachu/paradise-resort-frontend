@@ -1,1 +1,1 @@
-Discover harmony and elegance at The Serene Escape. From peaceful retreats surrounded by nature to indulgent luxury experiences, every moment is designed to refresh your soul.
+Discover harmony and elegance at Azure Horizon. From peaceful retreats surrounded by nature to indulgent luxury experiences, every moment is designed to refresh your soul.
