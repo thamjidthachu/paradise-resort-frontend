@@ -5,17 +5,18 @@ import { Card, CardContent } from '@/components/ui/card'
 import { TrendingHeader } from '@/components/trending-header'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
+import ContactForm from '@/components/contact-form'
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <TrendingHeader />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-black">
         <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Contact Azure Horizon</h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4 dark:text-white">Contact Azure Horizon</h1>
+          <p className="text-gray-600 max-w-2xl mx-auto dark:text-gray-400">
             Planning your perfect getaway? Our dedicated concierge team is here to help you create unforgettable memories.
           </p>
         </div>
@@ -80,13 +81,13 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-teal-50 to-blue-50">
+            <Card className="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-teal-900 dark:to-blue-900">
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <Waves className="h-6 w-6 text-teal-600 mr-3" />
                   <div>
-                    <h3 className="font-semibold text-teal-800">Getting Here</h3>
-                    <p className="text-teal-700 text-sm">
+                    <h3 className="font-semibold text-teal-800 dark:text-black">Getting Here</h3>
+                    <p className="text-teal-700 text-sm dark:text-gray-400">
                       30-minute seaplane transfer from Malé International Airport
                     </p>
                   </div>
@@ -97,7 +98,7 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            {/* Contact form component can be directly used here if not using dynamic import */}
+            <ContactForm />
           </div>
         </div>
       </div>
