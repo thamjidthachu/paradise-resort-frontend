@@ -10,9 +10,15 @@ import { TrendingHeader } from '@/components/trending-header'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { useBooking } from '@/components/booking-provider'
+import { useEffect, useState } from "react"
 
 export default function CartPage() {
+  const [mounted, setMounted] = useState(false)
   const { state, dispatch } = useBooking()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const updateQuantity = (id: string, quantity: number) => {
     dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } })
@@ -20,6 +26,17 @@ export default function CartPage() {
 
   const removeService = (id: string) => {
     dispatch({ type: 'REMOVE_SERVICE', payload: id })
+  }
+
+  if (!mounted) {
+    return (
+      <div className="container mx-auto p-8">
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+        </div>
+      </div>
+    )
   }
 
   if (state.items.length === 0) {

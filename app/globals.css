@@ -124,13 +124,13 @@
 
 /* Theme toggle styles */
 :root {
-  --switch-width: 60px;
-  --switch-height: 30px;
-  --switch-round: 25px;
+  --switch-width: 50px;
+  --switch-height: 25px;
+  --switch-round: 20px;
   --switch-padding-x: 3px;
-  --sunmoon-size: 24px;
-  --cloud-size: 15px;
-  --stars-size: 20px;
+  --sunmoon-size: 20px;
+  --cloud-size: 12.5px;
+  --stars-size: 18px;
 }
 
 /* Switch base styles */

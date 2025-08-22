@@ -92,7 +92,7 @@ export default function RegisterPage() {
       <Card className="w-full max-w-md shadow-xl animate-fade-in">
         <CardContent className="p-8">
           <h2 className="text-2xl font-bold mb-2 text-center">Create Account</h2>
-          <p className="text-gray-500 mb-6 text-center">Join our Serene community</p>
+          <p className="text-gray-500 mb-6 text-center">Join our Azure community</p>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Label htmlFor="username">Username</Label>

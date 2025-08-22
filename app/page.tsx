@@ -24,15 +24,24 @@ type Service = {
 export default function HomePage() {
   const [services, setServices] = useState<Service[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    authFetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/`)
-      .then((res) => res.json())
-      .then((data) => {
-        setServices(data)
+    const fetchServices = async () => {
+      try {
+        const res = await authFetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/services/`)
+        if (!res.ok) throw new Error('Failed to fetch services')
+        const data = await res.json()
+        setServices(Array.isArray(data) ? data : [])
+      } catch (err) {
+        console.error('Error fetching services:', err)
+        setError('Failed to load services')
+      } finally {
         setLoading(false)
-      })
-      .catch(() => setLoading(false))
+      }
+    }
+
+    fetchServices()
   }, [])
 
   return (
@@ -46,7 +55,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <Image
             src="/resort-hero.png"
-            alt="The Serene Escape"
+            alt="Azure Horizon"
             fill
             className="object-cover"
             priority
@@ -61,7 +70,7 @@ export default function HomePage() {
               Beyond rest, into peace.
             </h1>
             <p className="text-xl mb-8 text-white/95 drop-shadow-md">
-              Discover harmony and elegance at The Serene Escape.
+              Discover harmony and elegance at Azure Horizon.
               From peaceful retreats surrounded by nature to indulgent luxury experiences,
               every moment is designed to refresh your soul.
             </p>
@@ -131,7 +140,26 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {loading ? (
-              <p className="col-span-3 text-center">Loading...</p>
+              // Loading skeleton
+              [...Array(3)].map((_, index) => (
+                <Card key={`skeleton-${index}`} className="group">
+                  <CardContent className="p-6">
+                    <div className="animate-pulse">
+                      <div className="bg-gray-200 h-48 rounded-lg mb-4"></div>
+                      <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                      <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            ) : error ? (
+              <div className="col-span-3 text-center text-gray-600">
+                {error}
+              </div>
+            ) : services.length === 0 ? (
+              <div className="col-span-3 text-center text-gray-600">
+                No services available at the moment.
+              </div>
             ) : (
               services.map((service) => (
                 <Card
@@ -169,7 +197,7 @@ export default function HomePage() {
       <section className="py-16 bg-primary text-primary-foreground  shadow-sm bg-teal-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Ready for Your Serene Experience?
+            Ready for Your Azure Experience?
           </h2>
           <p className="text-xl mb-8 text-teal-100">
             Book your dream vacation today and create memories that will last a

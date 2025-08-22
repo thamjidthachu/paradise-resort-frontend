@@ -32,6 +32,7 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     setMounted(true)
+    // Only redirect after component is mounted on client
     if (!items || items.length === 0) {
       router.push("/cart")
     }
