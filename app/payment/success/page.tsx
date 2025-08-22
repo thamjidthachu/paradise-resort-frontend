@@ -10,7 +10,7 @@ export default function PaymentSuccessPage() {
   const bookingNumber = `RST-${Math.random().toString(36).substr(2, 9).toUpperCase()}`
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-black">
       <Navbar />
       <TrendingHeader />
       
